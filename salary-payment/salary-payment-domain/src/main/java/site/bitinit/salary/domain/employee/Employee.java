@@ -1,9 +1,9 @@
 package site.bitinit.salary.domain.employee;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import site.bitinit.salary.common.model.EntityWithVersion;
 import site.bitinit.salary.domain.affiliation.AffiliationId;
-import site.bitinit.salary.domain.employee.classification.PaymentClassification;
-import site.bitinit.salary.domain.employee.paymentmothd.PaymentMethod;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +13,9 @@ import java.util.Objects;
  * @author john
  * @date 2021/10/24
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class Employee {
-
-    private Long id;
+public class Employee extends EntityWithVersion {
 
     private String name;
 
@@ -25,6 +24,8 @@ public class Employee {
     private PaymentClassification paymentClassification;
 
     private PaymentMethod paymentMethod;
+
+    private PaymentSchedule paymentSchedule;
 
     private List<AffiliationId> affiliations;
 

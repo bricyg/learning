@@ -1,12 +1,13 @@
-package site.bitinit.salary.infrastructure.convertor.employee;
-
-import site.bitinit.salary.domain.employee.paymentmothd.HoldMethod;
+package site.bitinit.salary.domain.employee.paymentmothd;
 
 /**
  * @author john
  * @date 2021/10/24
  */
 public enum PaymentMethodType {
+    /**
+     * 支票支付
+     */
     holdPayment("hold", "支票支付", null),
     directMethod("direct", "现金支付", null),
     mailMethod("mail", "邮件支付", HoldMethod.class)
@@ -41,16 +42,26 @@ public enum PaymentMethodType {
                 return type;
             }
         }
-        return null;
+        throw new IllegalArgumentException("没有该 code:" + code);
     }
 
-    public static PaymentMethodType classOf(Class<?> clazz) {
+    public static PaymentMethodType of(Class<?> clazz) {
         PaymentMethodType[] types = PaymentMethodType.values();
         for (PaymentMethodType type: types) {
             if (type.getClazz().equals(clazz)) {
                 return type;
             }
         }
-        return null;
+        throw new IllegalArgumentException("没有该 class:" + clazz.getName());
+    }
+
+    public static boolean contains(String code) {
+        PaymentMethodType[] types = PaymentMethodType.values();
+        for (PaymentMethodType type: types) {
+            if (type.code.equals(code)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

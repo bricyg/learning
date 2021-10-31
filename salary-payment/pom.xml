@@ -48,7 +48,7 @@
             </dependency>
             <dependency>
                 <groupId>site.bitinit.salary</groupId>
-                <artifactId>salary-payment-service</artifactId>
+                <artifactId>salary-payment-application</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

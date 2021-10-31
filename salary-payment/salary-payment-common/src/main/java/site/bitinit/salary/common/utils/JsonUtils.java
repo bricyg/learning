@@ -12,39 +12,34 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class JsonUtils {
 
-    private final static String EMPTY = "";
-
-    private static final ObjectMapper objectMapper;
+    private static final ObjectMapper OBJECT_MAPPER;
 
     static {
-        objectMapper = new ObjectMapper();
+        OBJECT_MAPPER = new ObjectMapper();
     }
 
     public static String toJson(Object obj) {
-        String json = EMPTY;
         try {
-            json = objectMapper.writeValueAsString(obj);
+            return OBJECT_MAPPER.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
-            log.error("json 序列化失败", e);
+            throw new IllegalStateException("json 序列化失败", e);
         }
-        return json;
     }
 
     public static <T> T readValue(String json, Class<T> clazz) {
         try {
-            return objectMapper.readValue(json, clazz);
+            return OBJECT_MAPPER.readValue(json, clazz);
         } catch (JsonProcessingException e) {
-            log.error("json 反序列化失败", e);
+            throw new IllegalStateException("json 反序列化失败", e);
         }
-        return null;
     }
 
     public static <T> T readValue(String json, TypeReference<T> valueTypeRef) {
         try {
-            return objectMapper.readValue(json, valueTypeRef);
+            return OBJECT_MAPPER.readValue(json, valueTypeRef);
         } catch (Exception e) {
             log.error("json 反序列化失败", e);
+            throw new IllegalStateException("json 反序列化失败", e);
         }
-        return null;
     }
 }

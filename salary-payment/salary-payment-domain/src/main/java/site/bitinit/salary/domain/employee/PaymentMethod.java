@@ -1,4 +1,4 @@
-package site.bitinit.salary.domain.employee.paymentmothd;
+package site.bitinit.salary.domain.employee;
 
 /**
  * 支付方法

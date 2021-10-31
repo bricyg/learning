@@ -1,13 +1,25 @@
-package site.bitinit.salary.infrastructure.convertor.employee;
+package site.bitinit.salary.domain.employee.classification;
+
+import site.bitinit.salary.common.utils.JsonUtils;
+import site.bitinit.salary.domain.employee.PaymentClassification;
 
 /**
  * @author john
  * @date 2021/10/24
  */
 public enum PaymentClassificationType {
-    salariedPayment("salaried", "带薪员工", null),
-    hourlyPayment("hourly", "钟点工", null),
-    commissionedPayment("commissioned", "销售员工", null)
+    /**
+     * 带薪员工
+     */
+    salariedPayment("salaried", "带薪员工", SalariedClassification.class),
+    /**
+     * 钟点工
+     */
+    hourlyPayment("hourly", "钟点工", HourlyClassification.class),
+    /**
+     * 销售员
+     */
+    commissionedPayment("commissioned", "销售员", null)
     ;
     private final String code;
     private final String description;
@@ -31,23 +43,28 @@ public enum PaymentClassificationType {
         return clazz;
     }
 
-    public static PaymentClassificationType typeOf(String code) {
+    public static PaymentClassificationType of(String code) {
         PaymentClassificationType[] types = PaymentClassificationType.values();
         for (PaymentClassificationType type: types) {
             if (type.getCode().equals(code)) {
                 return type;
             }
         }
-        return null;
+        throw new IllegalArgumentException("没有该 code:" + code);
     }
 
-    public static PaymentClassificationType classOf(Class<?> clazz) {
+    public static PaymentClassificationType of(Class<?> clazz) {
         PaymentClassificationType[] types = PaymentClassificationType.values();
         for (PaymentClassificationType type: types) {
             if (type.getClazz().equals(clazz)) {
                 return type;
             }
         }
-        return null;
+        throw new IllegalArgumentException("没有该 class:" + clazz.getName());
+    }
+
+    public static PaymentClassification valueOf(String code, String json) {
+        PaymentClassificationType type = of(code);
+        return (PaymentClassification) JsonUtils.readValue(json, type.getClazz());
     }
 }

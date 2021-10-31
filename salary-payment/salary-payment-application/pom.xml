@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>salary-payment-service</artifactId>
+    <artifactId>salary-payment-application</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -20,6 +20,20 @@
         <dependency>
             <groupId>site.bitinit.salary</groupId>
             <artifactId>salary-payment-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>site.bitinit.salary</groupId>
+            <artifactId>salary-payment-infrastructure</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

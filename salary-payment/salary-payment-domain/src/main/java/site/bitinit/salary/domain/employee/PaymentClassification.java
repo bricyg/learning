@@ -1,4 +1,4 @@
-package site.bitinit.salary.domain.employee.classification;
+package site.bitinit.salary.domain.employee;
 
 /**
  * @author john
